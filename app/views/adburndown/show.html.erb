@@ -6,7 +6,7 @@
 <script type="text/javascript">
     Burndown.setOptions(
     {
-        title: {text: 'Burn-down chart for <%=h @sprintName || 'whole project' %>'},
+        title: {text: 'burn-down chart'},
         yAxis: {title: {text: '<%= l(:label_burndown_axis_y_name) %>'}},
         tooltip:
         {
@@ -35,6 +35,10 @@
     });
 </script>
 
+
+<div id="burndown">
+</div>
+
 <h2><%= l(:label_menu_burndown) %></h2>
 
 <div class="fl">
@@ -58,5 +62,3 @@
   </div>
 </div>
 
-<div id="burndown">
-</div>
