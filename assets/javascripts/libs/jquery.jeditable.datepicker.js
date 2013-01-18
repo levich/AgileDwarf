@@ -39,6 +39,7 @@ jQuery.expr[':'].focus = function( elem ) {
           settings.onblur = 'nothing';
 
           datepicker = {
+	    dateFormat: 'dd/mm/yy',
             onSelect: function() {
               // clicking specific day in the calendar should
               // submit the form and close the input field

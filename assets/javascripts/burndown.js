@@ -66,7 +66,8 @@ var Burndown = function ($)
                 else
                 {
                     // rest of work = ((100 - done_ratio) * estimate) / 100
-                    sum += ((100 - task.done_ratio) * (task.estimated_hours || 0)) / 100;
+                    //sum += ((100 - task.done_ratio) * (task.estimated_hours || 0)) / 100;
+                    sum += ((100 - task.sprints_tasks.done_ratio) * (task.sptrints_tasks.estimated_hours || 0)) / 100;
                 }
             }
             // add new point to series
