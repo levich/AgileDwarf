@@ -113,7 +113,7 @@
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
 }
-
+/*
 .sc_task .task_subject
 {
     -o-text-overflow: ellipsis;
@@ -121,6 +121,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
+*/
 
 .sc_task .task_estimate_sep
 {
