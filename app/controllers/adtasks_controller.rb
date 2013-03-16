@@ -10,6 +10,8 @@ class AdtasksController < ApplicationController
     @assignables = @project.assignable_users
     @assignables_list = {}
     @project.assignable_users.each{|u| @assignables_list[u.id] = u.firstname + ' ' + u.lastname}
+    # Support Assign to nobody
+    @assignables_list[""] = ""
 
     # filter values
     @selected = params[:sprint] || (@sprints[0].nil? ? 'all' : @sprints[0].id.to_s)
