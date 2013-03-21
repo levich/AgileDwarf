@@ -11,9 +11,10 @@ var Burndown = function ($)
         if (typeof mysql != 'string')
             return null;
         // 2011/11/03 00:00:00 +0800
-        var t = mysql.split(/[\/ \-:]/);
+        // var t = mysql.split(/[\/ \-:]/);
+        var t = mysql.split('-');
         // [Y, M, D]
-        return Date.UTC(t[0], t[1] - 1, t[2]);
+        return Date.UTC(t[0], t[1] - 1, t[2].substr(0,2));
     };
 
     obj.setSettings = function (s)
@@ -78,15 +79,10 @@ var Burndown = function ($)
             while (dateTime == changeDate)
             {
                 if (changes[i].prop_key == 'done_ratio')
-<<<<<<< HEAD
                     tasks[changes[i].issueId].sprints_tasks.done_ratio = changes[i].value;
                 else
                     tasks[changes[i].issueId].sprints_tasks.estimated_hours = changes[i].value;
-=======
-		    tasks[changes[i].issueId].sprints_tasks.done_ratio = changes[i].value;
-                else
-		    tasks[changes[i].issueId].sprints_tasks.estimated_hours = changes[i].value;
->>>>>>> 7bd59bec6ef62c7007428f4afd40ed533fba18fa
+
                 // next change
                 i++;
                 if (i >= len)
