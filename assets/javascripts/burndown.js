@@ -45,6 +45,7 @@ var Burndown = function ($)
         {
             if (!tasks.hasOwnProperty(id))
                 continue;
+
             tasks[id].sprints_tasks.created_on = Date.fromMysql(tasks[id].sprints_tasks.created_on);
         }
         // loop through changes
@@ -77,9 +78,15 @@ var Burndown = function ($)
             while (dateTime == changeDate)
             {
                 if (changes[i].prop_key == 'done_ratio')
+<<<<<<< HEAD
                     tasks[changes[i].issueId].sprints_tasks.done_ratio = changes[i].value;
                 else
                     tasks[changes[i].issueId].sprints_tasks.estimated_hours = changes[i].value;
+=======
+		    tasks[changes[i].issueId].sprints_tasks.done_ratio = changes[i].value;
+                else
+		    tasks[changes[i].issueId].sprints_tasks.estimated_hours = changes[i].value;
+>>>>>>> 7bd59bec6ef62c7007428f4afd40ed533fba18fa
                 // next change
                 i++;
                 if (i >= len)
