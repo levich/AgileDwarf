@@ -61,6 +61,6 @@
   </fieldset>
 </div>
 
-<div id="tasks">
+<div id="tasks" class="column-<%= @columns.size %>">
   <%= render :partial => "column", :collection => @columns %>
 </div>

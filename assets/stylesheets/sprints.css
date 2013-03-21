@@ -1,7 +1,7 @@
 #tasks
 {
-    margin: 0 5% 0 5%;
-    width: 90%;
+    margin: 10px 0;
+    width: 100%;
     float: left;
 }
 
@@ -54,12 +54,24 @@
 {
     float: left;
     margin: 0 1% 0 1%;
-    width: 31%;
     border: 1px solid black;
     background: #E3E3E3;
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+}
+
+.column-2 .task_panel {
+  width: 47%;
+}
+.column-3 .task_panel {
+  width: 31%;
+}
+.column-4 .task_panel {
+  width: 22%;
+}
+.column-5 .task_panel {
+  width: 17%;
 }
 
 .task_panel h3, .sprints_panel h3
@@ -118,7 +130,7 @@
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
 }
-
+/*
 .sc_task .task_subject
 {
     -o-text-overflow: ellipsis;
@@ -126,6 +138,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
+*/
 
 .sc_task .task_estimate_sep
 {
