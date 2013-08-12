@@ -1,12 +1,14 @@
-<% if task.parent %>
+<% unless task.tracker_id == Tracker.where(name: "UserStory").first.try(:id) %>
 <div id="task.<%=h task.id %>" class="sc_task sc_task_tracker_<%= Tracker.find(task.tracker_id).name %>  <%= task.children.count  == 0 or Tracker.find(task.tracker_id).name != 'UserStorie' ? '' : 'sc_task_hide' %> <%= @closed_status == task.status_id ? 'closed_task' : '' %>">
   
+    <% if task.parent %>
     <div class="task_parent">
       User Story: 
       <span class="task_no">#<%= link_to task.parent_id, :controller => 'issues', :action => 'show', :id => task.parent_id %></span>
       <span><%= task.parent.subject %></span>
     </div>
-    <div style="<%= task.parent_id ? 'padding-left: 30px; padding-top: 10px;' : '' %>">
+    <%- end %>
+    <div style="padding-left: 30px; padding-top: 10px;">
       <div>
         <span class="task_no">#<%= link_to task.id, :controller => 'issues', :action => 'show', :id => task %></span>
         <span class="task_desc"><img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/></span>
