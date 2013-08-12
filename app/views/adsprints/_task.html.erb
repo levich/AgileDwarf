@@ -1,8 +1,22 @@
+<% if task.parent %>
 <div id="task.<%=h task.id %>" class="sc_task sc_task_tracker_<%= Tracker.find(task.tracker_id).name %>  <%= task.children.count  == 0 or Tracker.find(task.tracker_id).name != 'UserStorie' ? '' : 'sc_task_hide' %> <%= @closed_status == task.status_id ? 'closed_task' : '' %>">
-  <div class="fl task_no">#<%= link_to task.id, :controller => 'issues', :action => 'show', :id => task %></div>
-  <div class="fl task_desc"><img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/></div>
-  <div class="fl task_tracker_name"><%=h task.t_name %>&nbsp;-&nbsp;</div>
-  <div class="task_subject"><%=h task.subject %></div>
-  <div class="task_estimate fl"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></div>
-  <div class="task_owner fr"><%=h task.assigned_to %></div>
+  
+    <div class="task_parent">
+      User Story: 
+      <span class="task_no">#<%= link_to task.parent_id, :controller => 'issues', :action => 'show', :id => task.parent_id %></span>
+      <span><%= task.parent.subject %></span>
+    </div>
+    <div style="<%= task.parent_id ? 'padding-left: 30px; padding-top: 10px;' : '' %>">
+      <div>
+        <span class="task_no">#<%= link_to task.id, :controller => 'issues', :action => 'show', :id => task %></span>
+        <span class="task_desc"><img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/></span>
+        <span class="task_tracker_name"><%=h task.t_name %>&nbsp;-&nbsp;</span>
+        <span class="task_subject"><%=h task.subject %></span>
+      </div>
+      <div>
+        <span class="fl task_estimate"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></span>
+        <span class="fr task_owner"><%=h task.assigned_to %></span>
+      </div>
+    </div>
 </div>
+<%- end %>
