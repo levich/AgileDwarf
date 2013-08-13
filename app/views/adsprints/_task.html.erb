@@ -1,12 +1,13 @@
-<% unless task.tracker_id == Tracker.where(name: "UserStory").first.try(:id) %>
 <div id="task.<%=h task.id %>" class="sc_task sc_task_tracker_<%= Tracker.find(task.tracker_id).name %>  <%= task.children.count  == 0 or Tracker.find(task.tracker_id).name != 'UserStorie' ? '' : 'sc_task_hide' %> <%= @closed_status == task.status_id ? 'closed_task' : '' %>">
   
-    <% if task.parent %>
-    <div class="task_parent">
-      User Story: 
-      <span class="task_no">#<%= link_to task.parent_id, :controller => 'issues', :action => 'show', :id => task.parent_id %></span>
-      <span><%= task.parent.subject %></span>
-    </div>
+    <% if task.parent || task.tracker_id == Tracker.where(name: "UserStory").first.try(:id) %>
+      <% (task.parent || task).tap do |user_story| %>
+      <div class="task_parent">
+        User Story: 
+        <span class="task_no">#<%= link_to user_story.id, :controller => 'issues', :action => 'show', :id => user_story.id %></span>
+        <span><%= user_story.subject %></span>
+      </div>
+      <%- end %>
     <%- end %>
     <div style="padding-left: 30px; padding-top: 10px;">
       <div>
@@ -21,4 +22,3 @@
       </div>
     </div>
 </div>
-<%- end %>
