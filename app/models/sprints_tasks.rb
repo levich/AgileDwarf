@@ -31,8 +31,13 @@ class SprintsTasks < Issue
 
   def self.get_tasks_by_sprint(project, sprint)
     tasks = []
-    cond = ["project_id = ? and is_closed = ?", project.id, false]
-    unless sprint.nil?
+    cond = ["is_closed = ?", false]
+    if project.present?
+      cond[0] += ' and project_id = ?'
+      cond << project.id
+    end
+
+    if sprint.present?
       if sprint == 'null'
         cond[0] += ' and fixed_version_id is null'
       else
@@ -60,7 +65,7 @@ class SprintsTasks < Issue
     end
   end
 
-  def self.get_backlog(project)
+  def self.get_backlog(project = nil)
     return SprintsTasks.get_tasks_by_sprint(project, 'null')
   end
 
