@@ -98,7 +98,7 @@
     display:None;
 }
 
-.task_list .sc_task.sc_task_tracker_UserStorie
+/*.task_list .sc_task.sc_task_tracker_UserStory
 {
     border-color: #276DFA;
     background: rgba(39, 109, 250, 0.3);
@@ -107,7 +107,7 @@
     -ms-box-shadow: 0 0 4px #276DFA;
     -o-box-shadow: 0 0 4px #276DFA;
     -webkit-box-shadow: 0 0 4px #276DFA;
-}
+}*/
 
 .task_list
 {
@@ -122,7 +122,7 @@
     cursor: pointer;
     overflow: hidden;
     height: 1%;
-    background: white;
+    /*background: white;*/
     padding: 7px;
     border: 1px solid black;
     margin: 3px;
