@@ -21,6 +21,7 @@ Redmine::Plugin.register :agile_dwarf do
   }, :partial => 'shared/settings'
 
   permission :all_sprints, { :all_sprints => [:index]}
+  menu :application_menu, :all_sprints, { :controller => 'all_sprints', :action => 'index' }, :caption => :label_menu_all_sprints
 
   project_module :scrum do
     permission :sprints, {:adsprints => [:list], :adtaskinl => [:update, :inplace, :create, :tooltip], :adsprintinl => [:create, :inplace]}
@@ -31,7 +32,6 @@ Redmine::Plugin.register :agile_dwarf do
   end
 
   menu :project_menu, :adtasks, { :controller => 'adtasks', :action => 'list' }, :caption => :label_menu_mytasks, :after => :activity, :param => :project_id
-  menu :application_menu, :all_sprints, { :controller => 'all_sprints', :action => 'index' }, :caption => :label_menu_all_sprints
-  menu :project_menu, :adsprints, { :controller => 'adsprints', :action => 'list' }, :caption => :label_menu_sprints, :after => :all_sprints, :param => :project_id
+  menu :project_menu, :adsprints, { :controller => 'adsprints', :action => 'list' }, :caption => :label_menu_sprints, :after => :adtasks, :param => :project_id
   menu :project_menu, :adburndown, { :controller => 'adburndown', :action => 'show' }, :caption => :label_menu_burndown, :after => :adsprints, :param => :project_id
 end
