@@ -2,6 +2,11 @@ require 'redmine'
 
 require 'scrum_enabled_module_patch'
 
+# This plugin should be reloaded in development mode.
+if (Rails.env == "development")
+  ActiveSupport::Dependencies.autoload_once_paths.reject!{|x| x =~ /^#{Regexp.escape(File.dirname(__FILE__))}/}
+end
+
 Redmine::Plugin.register :agile_dwarf do
   name 'Agile dwarf plugin'
   author 'Mark Ablovacky'

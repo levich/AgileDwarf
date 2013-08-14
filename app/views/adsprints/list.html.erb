@@ -62,6 +62,9 @@
 
 <div id="tasks">
   <div class='sprints_column'>
+
+    <%= render :partial => "sprint", :collection => @releases %>
+
     <div class='sprints_panel'>
       <div class="sprints_panel_header">
         <h3 class="fl"><%= l(:label_backlog) %></h3>

@@ -5,7 +5,10 @@ class AdsprintsController < ApplicationController
 
   def list
     @backlog = SprintsTasks.get_backlog(@project)
-    @sprints = Sprints.all_sprints(@project)
+    @sprints = Sprints.all_sprints(@project).reject! {|s| s.name.downcase.match(/release$/).present? }
+    # releases are a versioned backlog
+    @releases = Sprints.all_sprints(@project).select {|s| s.name.downcase.match(/release$/).present? }
+    puts @releases.inspect
     @sprints.each{|s| s['tasks'] = SprintsTasks.get_tasks_by_sprint(@project, [s.id])}
     @assignables = {}
     @project.assignable_users.each{|u| @assignables[u.id] = u.firstname + ' ' + u.lastname}
