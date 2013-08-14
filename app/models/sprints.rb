@@ -6,14 +6,14 @@ class Sprints < Version
   class << self
     def open_sprints(project = nil)
       if project
-        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open' and project_id = ?", project.id ])
+        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open' and (project_id = ? OR sharing = 'system')", project.id])
       else
-        scoped(:order => 'ir_start_date ASC, ir_end_date ASC')
+        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open'"])
       end
     end
     def all_sprints(project = nil)
       if project
-        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "project_id = ?", project.id ])
+        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "project_id = ? OR sharing = 'system'", project.id ])
       else
         scoped(:order => 'ir_start_date ASC, ir_end_date ASC')
       end

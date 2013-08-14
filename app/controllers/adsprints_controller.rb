@@ -5,7 +5,7 @@ class AdsprintsController < ApplicationController
 
   def list
     @backlog = SprintsTasks.get_backlog(@project)
-    @sprints = Sprints.all_sprints(@project).reject! {|s| s.name.downcase.match(/release$/).present? }
+    @sprints = Sprints.all_sprints(@project).select {|s| s.name.downcase.match(/release$/).nil? }
     # releases are a versioned backlog
     @releases = Sprints.all_sprints(@project).select {|s| s.name.downcase.match(/release$/).present? }
     puts @releases.inspect
