@@ -2,8 +2,8 @@ class AllSprintsController < ApplicationController
   unloadable
 
   def index
-    @backlog = SprintsTasks.get_backlog.group_by(&:project_id).each {|project_id, sprint_tasks| sprint_tasks.sort!{|a,b| a.parent_id <=> b.parent_id } }
-    @sprints = Sprints.all_sprints.group_by(&:project_id).each {|project_id, issues| issues.sort!{|a,b| a.parent_id <=> b.parent_id } }
+    @backlog = SprintsTasks.get_backlog.group_by(&:project_id).each {|project_id, sprint_tasks| sprint_tasks.sort!{|a,b| a.parent_id || 0 <=> b.parent_id || 0 } }
+    @sprints = Sprints.all_sprints.group_by(&:project_id)
     # @sprints.each{|s| s['tasks'] = SprintsTasks.get_tasks_by_sprint(@project, [s.id])}
     # @assignables = {}
     # @project.assignable_users.each{|u| @assignables[u.id] = u.firstname + ' ' + u.lastname}
