@@ -1,19 +1,21 @@
 class Sprints < Version
   unloadable
 
+  attr_writer :tasks
+
   validate :start_and_end_dates
 
   class << self
     def open_sprints(project = nil)
       if project
-        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open' and (project_id = ? OR sharing = 'system')", project.id])
+        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open' and (project_id IN (?) OR sharing = 'system')", [project.id, project.parent_id].compact ])
       else
         scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open'"])
       end
     end
     def all_sprints(project = nil)
       if project
-        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "project_id = ? OR sharing = 'system'", project.id ])
+        scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "project_id IN (?) OR sharing = 'system'", [project.id, project.parent_id].compact ])
       else
         scoped(:order => 'ir_start_date ASC, ir_end_date ASC')
       end
@@ -25,7 +27,6 @@ class Sprints < Version
   end
 
   def tasks
-    SprintsTasks.get_tasks_by_sprint(self.project, self.id)
+    @tasks || SprintsTasks.get_tasks_by_sprint(self.project, self.id)
   end
-
 end

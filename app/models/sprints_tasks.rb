@@ -30,11 +30,11 @@ class SprintsTasks < Issue
   end
 
   def self.get_tasks_by_sprint(project, sprint)
-    tasks = []
+
     cond = ["is_closed = ?", false]
     if project.present?
-      cond[0] += ' and project_id = ?'
-      cond << project.id
+      cond[0] += ' and project_id IN (?)'
+      cond << [project.id, project.parent_id].compact
     end
 
     if sprint.present?
@@ -45,7 +45,11 @@ class SprintsTasks < Issue
         cond << sprint
       end
     end
-    SprintsTasks.find(:all, :select => 'issues.*, trackers.name AS t_name', :order => SprintsTasks::ORDER, :conditions => cond, :joins => :status, :joins => "left join issue_statuses on issue_statuses.id = status_id left join trackers on trackers.id = tracker_id", :include => :assigned_to).each{|task| tasks << task}
+
+    tasks = [].tap do |t|
+      SprintsTasks.find(:all, :select => 'issues.*, trackers.name AS t_name', :order => SprintsTasks::ORDER, :conditions => cond, :joins => :status, :joins => "left join issue_statuses on issue_statuses.id = status_id left join trackers on trackers.id = tracker_id", :include => :assigned_to).each{|task| t << task}
+    end
+    
     return filter_out_user_stories_with_children tasks
   end
 
