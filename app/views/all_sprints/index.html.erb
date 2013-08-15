@@ -64,6 +64,17 @@
 
 <div id="tasks">
   <div class='sprints_column'>
+
+    <% if false %>
+    <% @releases.each do |project_id, sprints| %>
+      <div class="project_task_list" style="margin: 20px 0">
+        <h3><%= link_to Project.find(project_id).name, project_issues_path(project_id), target: '_blank' %></h3>
+        <%= render :partial => "sprint", :collection => sprints %>
+      </div>
+    <%- end %>
+    <%- end %>
+    <%= render :partial => "sprint", :collection => @releases %>
+
     <div class='sprints_panel'>
       <div class="sprints_panel_header">
         <h3 class="fl"><%= l(:label_backlog) %></h3>
