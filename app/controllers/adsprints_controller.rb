@@ -13,6 +13,8 @@ class AdsprintsController < ApplicationController
     # Need to overwrite the @tasks for each sprint to use @project, and not the project the sprint has. (ie Sprint belongs to a Super Project but @project is a sub project)
     # TODO: this is fugly and needs to be cleaner
     @sprints.each {|s| s.tasks = SprintsTasks.get_tasks_by_sprint(@project, s.id) }
+    @releases.each {|s| s.tasks = SprintsTasks.get_tasks_by_sprint(@project, s.id) }
+    
     @assignables = {}
     @project.assignable_users.each{|u| @assignables[u.id] = u.firstname + ' ' + u.lastname}
     @project_id = @project.id
