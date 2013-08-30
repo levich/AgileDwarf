@@ -9,7 +9,7 @@ class AdtasksController < ApplicationController
     @project_id = @project.id
     @assignables = @project.assignable_users
     @assignables_list = {}
-    @project.assignable_users.each{|u| @assignables_list[u.id] = u.firstname + ' ' + u.lastname}
+    @project.assignable_users.each{|u| @assignables_list[u.id] = u.name}
     # Support Assign to nobody
     @assignables_list[""] = ""
 
