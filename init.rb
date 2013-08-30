@@ -2,7 +2,12 @@ require 'redmine'
 
 require 'scrum_enabled_module_patch'
 
-Redmine::Plugin.register :AgileDwarf do
+# This plugin should be reloaded in development mode.
+if (Rails.env == "development")
+  ActiveSupport::Dependencies.autoload_once_paths.reject!{|x| x =~ /^#{Regexp.escape(File.dirname(__FILE__))}/}
+end
+
+Redmine::Plugin.register :agile_dwarf do
   name 'Agile dwarf plugin'
   author 'Mark Ablovacky'
   description 'Agile for Redmine'
@@ -19,6 +24,9 @@ Redmine::Plugin.register :AgileDwarf do
       :stcolumn4 => 1,
       :stcolumn5 => 2,
   }, :partial => 'shared/settings'
+
+  permission :all_sprints, { :all_sprints => [:index]}
+  menu :application_menu, :all_sprints, { :controller => 'all_sprints', :action => 'index' }, :caption => :label_menu_all_sprints
 
   project_module :scrum do
     permission :sprints, {:adsprints => [:list], :adtaskinl => [:update, :inplace, :create, :tooltip], :adsprintinl => [:create, :inplace]}
