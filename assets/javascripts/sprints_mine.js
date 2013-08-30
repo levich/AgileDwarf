@@ -55,7 +55,7 @@
                 task.done = timeNew;
             }}, taskInlineOpts));
             // spent
-            $('.task_add_spent_value', el).editable(Sprints.getUrl('taskspent'), $.extend({name: 'hours', type: 'text', placeholder: 'X', width: 50, event: 'addspent', callback: function (res, settings)
+            /*$('.task_add_spent_value', el).editable(Sprints.getUrl('taskspent'), $.extend({name: 'hours', type: 'text', placeholder: 'X', width: 50, event: 'addspent', callback: function (res, settings)
             {
                 $(this).html('X');
                 var spent = el.find('.task_spent_time');
@@ -63,7 +63,7 @@
                 spent.text(timeNew);
                 panel.times.updateTaskSpent(task, timeNew).update();
                 task.spent = timeNew;
-            }}, taskInlineOpts));
+            }}, taskInlineOpts));*/
             // owner
             $('.task_owner', el).editable(Sprints.getUrl('taskinline'), $.extend({name: 'assigned_to_id', type: 'select', onblur : 'submit', placeholder: Sprints.l('task_owner_placeholder'),
                 data: Sprints.getProjectUsers(), callback: function (res, settings)

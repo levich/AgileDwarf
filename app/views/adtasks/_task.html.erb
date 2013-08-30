@@ -14,9 +14,15 @@
       <div class="task_estimate fl"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></div>
       <div class="measure fl">h</div>
   </div>
+  <div style="width: 20px;" class="fl">&nbsp;</div>
+  <div class="fl task_estimate_params"><%= format_date(task.start_date) %></div>
+  <div style="width: 20px;" class="fl">&nbsp;</div>
+  <div class="fl task_estimate_params"><%= format_date(task.due_date) %></div>
   <div class="task_add_spent fr">
-    <div class="task_add_spent_value fr">X</div>
+    <a href= <%=  new_issue_time_entry_path(task) %>>
+	<div class="task_add_spent_value fr">X</div>
     <div class="measure fr">+</div>
+	</a>
   </div>
   <div class="fr task_estimate_params">
       <div class="measure fr">h</div>
