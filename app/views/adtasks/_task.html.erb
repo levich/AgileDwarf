@@ -1,5 +1,5 @@
 <div id="task.<%=h task.id %>"
-		<% if task.due_date < Date.today %> style = "background-color: lightpink;" <% end %> 
+		<% if task.due_date && task.due_date < Date.today %> style = "background-color: lightpink;" <% end %> 
 		<% if task.due_date == Date.today %> style = "background-color: lightyellow;" <% end %>
 		 class="sc_task  sc_task_tracker_<%= Tracker.find(task.tracker_id).name %> <%= Tracker.find(task.tracker_id).name %>  <%= task.children.count  == 0 or Tracker.find(task.tracker_id).name != 'UserStorie' ? '' : 'sc_task_hide' %>">
 
